@@ -3,6 +3,10 @@
 # Problema 2 menu de restaurante
 # Autoria propia 
 
+
+# MATRIZ DEL MENÚ
+# [Nombre del Producto, Categoría, Precio Base]
+
 menu = [
     ["Hamburguesa", "Comida Rápida", 18000],
     ["Pizza", "Comida Rápida", 32000],
@@ -19,24 +23,18 @@ categoria_objetivo = "Comida Rápida"
 umbral_precio = 20000
 
 
-# ==========================================
+
 # FUNCIÓN PARA CALCULAR PRECIO FINAL
-# ==========================================
+
 def calcular_precio_final(categoria, precio_base):
 
-    # CONDICIÓN:
-    # Aplicar 15% de descuento si:
-    # 1. La categoría es igual a la categoría objetivo
-    # 2. El precio base es mayor al umbral definido
-
+    # Aplicar descuento del 15%
     if categoria == categoria_objetivo and precio_base > umbral_precio:
 
         descuento = precio_base * 0.15
         precio_final = precio_base - descuento
 
-    # Mantener el precio original
-    # si no se cumplen las condiciones
-
+    # Mantener precio original
     else:
 
         precio_final = precio_base
@@ -44,25 +42,31 @@ def calcular_precio_final(categoria, precio_base):
     return precio_final
 
 
-# ==========================================
+
 # MOSTRAR MENÚ
-# ==========================================
+
 print("========== MENÚ DEL RESTAURANTE ==========\n")
 
 for i in range(len(menu)):
 
-    print(i + 1, "-", menu[i][0])
+    nombre = menu[i][0]
+    precio_base = menu[i][2]
 
-# ==========================================
+    print(i + 1, "-", nombre, "- Precio: $", precio_base)
+
+print("-----------------------------------")
+
+
+
 # ELEGIR PRODUCTO
-# ==========================================
+
 print("\nSeleccione el número del producto que desea comprar:")
 opcion = int(input("Opción: "))
 
 
-# ==========================================
+
 # VALIDAR OPCIÓN
-# ==========================================
+
 if opcion >= 1 and opcion <= len(menu):
 
     producto = menu[opcion - 1]
@@ -71,18 +75,18 @@ if opcion >= 1 and opcion <= len(menu):
     categoria = producto[1]
     precio_base = producto[2]
 
-    # Llamar función
+    # Calcular precio final
     precio_final = calcular_precio_final(categoria, precio_base)
 
-    # ==========================================
-    # MOSTRAR RESULTADO
-    # ==========================================
+   
+    # FACTURA FINAL
+    
     print("\n========== FACTURA ==========")
     print("Producto:", nombre)
     print("Categoría:", categoria)
     print("Precio Base: $", precio_base)
 
-    # Mostrar si hubo descuento
+    # Mostrar si aplica promoción
     if precio_final < precio_base:
         print("Promoción aplicada: 15% de descuento")
     else:
